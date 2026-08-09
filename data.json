@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-09T18:52:02.920Z",
+  "generatedAt": "2026-08-09T19:48:58.003Z",
   "products": [
     {
       "id": "chatgpt-gpt4o",
@@ -17,7 +17,7 @@
       "adoption": null,
       "history": [],
       "changePct": null,
-      "lastUpdated": "2026-08-09T18:52:02.412Z"
+      "lastUpdated": "2026-08-09T19:48:57.320Z"
     },
     {
       "id": "deepseek-r1",
@@ -50,10 +50,14 @@
         {
           "ts": "2026-08-09T18:52:02.702Z",
           "value": 91981
+        },
+        {
+          "ts": "2026-08-09T19:48:57.692Z",
+          "value": 91981
         }
       ],
       "changePct": 0,
-      "lastUpdated": "2026-08-09T18:52:02.702Z"
+      "lastUpdated": "2026-08-09T19:48:57.692Z"
     },
     {
       "id": "gemini-15",
@@ -71,7 +75,7 @@
       "adoption": null,
       "history": [],
       "changePct": null,
-      "lastUpdated": "2026-08-09T18:52:02.702Z"
+      "lastUpdated": "2026-08-09T19:48:57.692Z"
     },
     {
       "id": "claude-35-sonnet",
@@ -89,7 +93,7 @@
       "adoption": null,
       "history": [],
       "changePct": null,
-      "lastUpdated": "2026-08-09T18:52:02.702Z"
+      "lastUpdated": "2026-08-09T19:48:57.692Z"
     },
     {
       "id": "grok-3",
@@ -107,7 +111,7 @@
       "adoption": null,
       "history": [],
       "changePct": null,
-      "lastUpdated": "2026-08-09T18:52:02.702Z"
+      "lastUpdated": "2026-08-09T19:48:57.692Z"
     },
     {
       "id": "llama-33",
@@ -140,10 +144,14 @@
         {
           "ts": "2026-08-09T18:52:02.919Z",
           "value": 7674
+        },
+        {
+          "ts": "2026-08-09T19:48:58.003Z",
+          "value": 7674
         }
       ],
       "changePct": 0,
-      "lastUpdated": "2026-08-09T18:52:02.919Z"
+      "lastUpdated": "2026-08-09T19:48:58.003Z"
     },
     {
       "id": "cursor-ide",
@@ -161,7 +169,7 @@
       "adoption": null,
       "history": [],
       "changePct": null,
-      "lastUpdated": "2026-08-09T18:52:02.919Z"
+      "lastUpdated": "2026-08-09T19:48:58.003Z"
     }
   ]
 }
