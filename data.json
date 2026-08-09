@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-09T10:23:47.383Z",
+  "generatedAt": "2026-08-09T11:55:25.045Z",
   "products": [
     {
       "id": "chatgpt-gpt4o",
@@ -17,7 +17,7 @@
       "adoption": null,
       "history": [],
       "changePct": null,
-      "lastUpdated": "2026-08-09T10:23:46.761Z"
+      "lastUpdated": "2026-08-09T11:55:24.376Z"
     },
     {
       "id": "deepseek-r1",
@@ -34,7 +34,7 @@
       },
       "adoption": {
         "metric": "github_stars",
-        "value": 91981,
+        "value": 91980,
         "sourceLabel": "★ GitHub stars",
         "sourceUrl": "https://github.com/deepseek-ai/DeepSeek-R1"
       },
@@ -42,10 +42,14 @@
         {
           "ts": "2026-08-09T10:23:47.119Z",
           "value": 91981
+        },
+        {
+          "ts": "2026-08-09T11:55:24.753Z",
+          "value": 91980
         }
       ],
-      "changePct": null,
-      "lastUpdated": "2026-08-09T10:23:47.119Z"
+      "changePct": 0,
+      "lastUpdated": "2026-08-09T11:55:24.753Z"
     },
     {
       "id": "gemini-15",
@@ -63,7 +67,7 @@
       "adoption": null,
       "history": [],
       "changePct": null,
-      "lastUpdated": "2026-08-09T10:23:47.120Z"
+      "lastUpdated": "2026-08-09T11:55:24.753Z"
     },
     {
       "id": "claude-35-sonnet",
@@ -81,7 +85,7 @@
       "adoption": null,
       "history": [],
       "changePct": null,
-      "lastUpdated": "2026-08-09T10:23:47.120Z"
+      "lastUpdated": "2026-08-09T11:55:24.753Z"
     },
     {
       "id": "grok-3",
@@ -99,7 +103,7 @@
       "adoption": null,
       "history": [],
       "changePct": null,
-      "lastUpdated": "2026-08-09T10:23:47.120Z"
+      "lastUpdated": "2026-08-09T11:55:24.753Z"
     },
     {
       "id": "llama-33",
@@ -124,10 +128,14 @@
         {
           "ts": "2026-08-09T10:23:47.383Z",
           "value": 7674
+        },
+        {
+          "ts": "2026-08-09T11:55:25.045Z",
+          "value": 7674
         }
       ],
-      "changePct": null,
-      "lastUpdated": "2026-08-09T10:23:47.383Z"
+      "changePct": 0,
+      "lastUpdated": "2026-08-09T11:55:25.045Z"
     },
     {
       "id": "cursor-ide",
@@ -145,7 +153,7 @@
       "adoption": null,
       "history": [],
       "changePct": null,
-      "lastUpdated": "2026-08-09T10:23:47.383Z"
+      "lastUpdated": "2026-08-09T11:55:25.045Z"
     }
   ]
 }
