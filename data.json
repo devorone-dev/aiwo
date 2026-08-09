@@ -1,12 +1,151 @@
 {
-  "generatedAt": null,
+  "generatedAt": "2026-08-09T10:23:47.383Z",
   "products": [
-    { "id": "chatgpt-gpt4o", "name": "ChatGPT / GPT-4o (OpenAI)", "category": "Multimodal LLM", "url": "https://chatgpt.com", "badge": "Market Leader", "description": "ChatGPT powered by GPT-4o is the leading conversational AI platform, offering state-of-the-art vision, voice, and real-time multimodal capabilities for consumer and enterprise workflows.", "tech": { "pricingModel": "Freemium ($20/mo)", "costInput1M": null, "costOutput1M": null, "contextWindow": null }, "adoption": null, "history": [], "changePct": null, "lastUpdated": null },
-    { "id": "deepseek-r1", "name": "DeepSeek R1 / V3 (DeepSeek)", "category": "Reasoning LLM", "url": "https://deepseek.com", "badge": "Disruptor", "description": "DeepSeek R1 is a frontier open-weights reasoning model optimized with Reinforcement Learning. It delivers high-level math, code, and logic performance at ultra-low inference costs.", "tech": { "pricingModel": "Open Source / Free Web", "costInput1M": null, "costOutput1M": null, "contextWindow": null }, "adoption": null, "history": [], "changePct": null, "lastUpdated": null },
-    { "id": "gemini-15", "name": "Gemini 1.5 Pro / Flash (Google)", "category": "Multimodal LLM", "url": "https://gemini.google.com", "badge": "Top Choice", "description": "Google Gemini 1.5 features a groundbreaking 2M token context window, allowing seamless ingestion of massive video, audio, and large repositories for enterprise intelligence.", "tech": { "pricingModel": "Freemium ($20/mo)", "costInput1M": null, "costOutput1M": null, "contextWindow": null }, "adoption": null, "history": [], "changePct": null, "lastUpdated": null },
-    { "id": "claude-35-sonnet", "name": "Claude 3.5 Sonnet (Anthropic)", "category": "Multimodal LLM", "url": "https://claude.ai", "badge": "Dev Choice", "description": "Anthropic Claude 3.5 Sonnet sets the standard for autonomous coding, visual reasoning, and human-like nuanced content creation, backed by interactive web Artifacts.", "tech": { "pricingModel": "Freemium ($20/mo)", "costInput1M": null, "costOutput1M": null, "contextWindow": null }, "adoption": null, "history": [], "changePct": null, "lastUpdated": null },
-    { "id": "grok-3", "name": "Grok 3 (xAI)", "category": "AI Search", "url": "https://x.ai", "badge": "Rising Star", "description": "Grok 3 by xAI leverages real-time access to the X global real-time stream, powered by massive GPU clusters to deliver low-latency live web intelligence and code synthesis.", "tech": { "pricingModel": "Subscription ($16/mo)", "costInput1M": null, "costOutput1M": null, "contextWindow": null }, "adoption": null, "history": [], "changePct": null, "lastUpdated": null },
-    { "id": "llama-33", "name": "Llama 3.3 70B (Meta)", "category": "Open Source LLM", "url": "https://llama.meta.com", "badge": "Open Source", "description": "Meta Llama 3.3 is the flagship open-weight 70B parameter LLM offering state-of-the-art inference efficiency for self-hosted enterprise infrastructure and custom fine-tuning.", "tech": { "pricingModel": "Free Open Source", "costInput1M": null, "costOutput1M": null, "contextWindow": null }, "adoption": null, "history": [], "changePct": null, "lastUpdated": null },
-    { "id": "cursor-ide", "name": "Cursor AI (Anysphere)", "category": "Coding Assistants", "url": "https://cursor.com", "badge": "Dev Choice", "description": "Cursor is an AI-first code editor built as a VS Code fork. Its Composer agent enables developers to write multi-file features and fix bugs through conversational natural language.", "tech": { "pricingModel": "Freemium ($20/mo)", "costInput1M": null, "costOutput1M": null, "contextWindow": null }, "adoption": null, "history": [], "changePct": null, "lastUpdated": null }
+    {
+      "id": "chatgpt-gpt4o",
+      "name": "ChatGPT / GPT-4o (OpenAI)",
+      "category": "Multimodal LLM",
+      "url": "https://chatgpt.com",
+      "badge": "Market Leader",
+      "description": "ChatGPT powered by GPT-4o is the leading conversational AI platform, offering state-of-the-art vision, voice, and real-time multimodal capabilities for consumer and enterprise workflows.",
+      "tech": {
+        "pricingModel": "Freemium ($20/mo)",
+        "costInput1M": "$2.5",
+        "costOutput1M": "$10",
+        "contextWindow": "128k"
+      },
+      "adoption": null,
+      "history": [],
+      "changePct": null,
+      "lastUpdated": "2026-08-09T10:23:46.761Z"
+    },
+    {
+      "id": "deepseek-r1",
+      "name": "DeepSeek R1 / V3 (DeepSeek)",
+      "category": "Reasoning LLM",
+      "url": "https://deepseek.com",
+      "badge": "Disruptor",
+      "description": "DeepSeek R1 is a frontier open-weights reasoning model optimized with Reinforcement Learning. It delivers high-level math, code, and logic performance at ultra-low inference costs.",
+      "tech": {
+        "pricingModel": "Open Source / Free Web",
+        "costInput1M": "$0.7",
+        "costOutput1M": "$2.5",
+        "contextWindow": "164k"
+      },
+      "adoption": {
+        "metric": "github_stars",
+        "value": 91981,
+        "sourceLabel": "★ GitHub stars",
+        "sourceUrl": "https://github.com/deepseek-ai/DeepSeek-R1"
+      },
+      "history": [
+        {
+          "ts": "2026-08-09T10:23:47.119Z",
+          "value": 91981
+        }
+      ],
+      "changePct": null,
+      "lastUpdated": "2026-08-09T10:23:47.119Z"
+    },
+    {
+      "id": "gemini-15",
+      "name": "Gemini 1.5 Pro / Flash (Google)",
+      "category": "Multimodal LLM",
+      "url": "https://gemini.google.com",
+      "badge": "Top Choice",
+      "description": "Google Gemini 1.5 features a groundbreaking 2M token context window, allowing seamless ingestion of massive video, audio, and large repositories for enterprise intelligence.",
+      "tech": {
+        "pricingModel": "Freemium ($20/mo)",
+        "costInput1M": null,
+        "costOutput1M": null,
+        "contextWindow": null
+      },
+      "adoption": null,
+      "history": [],
+      "changePct": null,
+      "lastUpdated": "2026-08-09T10:23:47.120Z"
+    },
+    {
+      "id": "claude-35-sonnet",
+      "name": "Claude 3.5 Sonnet (Anthropic)",
+      "category": "Multimodal LLM",
+      "url": "https://claude.ai",
+      "badge": "Dev Choice",
+      "description": "Anthropic Claude 3.5 Sonnet sets the standard for autonomous coding, visual reasoning, and human-like nuanced content creation, backed by interactive web Artifacts.",
+      "tech": {
+        "pricingModel": "Freemium ($20/mo)",
+        "costInput1M": null,
+        "costOutput1M": null,
+        "contextWindow": null
+      },
+      "adoption": null,
+      "history": [],
+      "changePct": null,
+      "lastUpdated": "2026-08-09T10:23:47.120Z"
+    },
+    {
+      "id": "grok-3",
+      "name": "Grok 3 (xAI)",
+      "category": "AI Search",
+      "url": "https://x.ai",
+      "badge": "Rising Star",
+      "description": "Grok 3 by xAI leverages real-time access to the X global real-time stream, powered by massive GPU clusters to deliver low-latency live web intelligence and code synthesis.",
+      "tech": {
+        "pricingModel": "Subscription ($16/mo)",
+        "costInput1M": null,
+        "costOutput1M": null,
+        "contextWindow": null
+      },
+      "adoption": null,
+      "history": [],
+      "changePct": null,
+      "lastUpdated": "2026-08-09T10:23:47.120Z"
+    },
+    {
+      "id": "llama-33",
+      "name": "Llama 3.3 70B (Meta)",
+      "category": "Open Source LLM",
+      "url": "https://llama.meta.com",
+      "badge": "Open Source",
+      "description": "Meta Llama 3.3 is the flagship open-weight 70B parameter LLM offering state-of-the-art inference efficiency for self-hosted enterprise infrastructure and custom fine-tuning.",
+      "tech": {
+        "pricingModel": "Free Open Source",
+        "costInput1M": null,
+        "costOutput1M": null,
+        "contextWindow": null
+      },
+      "adoption": {
+        "metric": "github_stars",
+        "value": 7674,
+        "sourceLabel": "★ GitHub stars",
+        "sourceUrl": "https://github.com/meta-llama/llama-models"
+      },
+      "history": [
+        {
+          "ts": "2026-08-09T10:23:47.383Z",
+          "value": 7674
+        }
+      ],
+      "changePct": null,
+      "lastUpdated": "2026-08-09T10:23:47.383Z"
+    },
+    {
+      "id": "cursor-ide",
+      "name": "Cursor AI (Anysphere)",
+      "category": "Coding Assistants",
+      "url": "https://cursor.com",
+      "badge": "Dev Choice",
+      "description": "Cursor is an AI-first code editor built as a VS Code fork. Its Composer agent enables developers to write multi-file features and fix bugs through conversational natural language.",
+      "tech": {
+        "pricingModel": "Freemium ($20/mo)",
+        "costInput1M": null,
+        "costOutput1M": null,
+        "contextWindow": null
+      },
+      "adoption": null,
+      "history": [],
+      "changePct": null,
+      "lastUpdated": "2026-08-09T10:23:47.383Z"
+    }
   ]
 }
