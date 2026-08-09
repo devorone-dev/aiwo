@@ -1,0 +1,39 @@
+name: Update AIWO data
+
+on:
+  schedule:
+    # 06:00 and 18:00 UTC — twice a day
+    - cron: '0 6,18 * * *'
+  workflow_dispatch: {} # lets you trigger a run manually from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v5
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Fetch live data
+        run: node scripts/fetch-data.mjs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Optional: add a free Cloudflare Radar token as a repo secret named
+          # CLOUDFLARE_API_TOKEN to enable domain-popularity data for products
+          # that aren't on GitHub/HuggingFace/OpenRouter (e.g. Cursor).
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+      - name: Commit updated data.json
+        run: |
+          git config user.name "aiwo-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data.json
+          git diff --cached --quiet && echo "No changes" || git commit -m "chore: refresh live data [skip ci]"
+          git push
