@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-14T09:39:46.530Z",
+  "generatedAt": "2026-08-14T20:00:18.657Z",
   "products": [
     {
       "id": "chatgpt-gpt4o",
@@ -17,7 +17,7 @@
       "adoption": null,
       "history": [],
       "changePct": null,
-      "lastUpdated": "2026-08-14T09:39:45.880Z"
+      "lastUpdated": "2026-08-14T20:00:17.970Z"
     },
     {
       "id": "deepseek-r1",
@@ -34,7 +34,7 @@
       },
       "adoption": {
         "metric": "github_stars",
-        "value": 92000,
+        "value": 92007,
         "sourceLabel": "★ GitHub stars",
         "sourceUrl": "https://github.com/deepseek-ai/DeepSeek-R1"
       },
@@ -90,10 +90,14 @@
         {
           "ts": "2026-08-14T09:39:46.232Z",
           "value": 92000
+        },
+        {
+          "ts": "2026-08-14T20:00:18.357Z",
+          "value": 92007
         }
       ],
       "changePct": 0,
-      "lastUpdated": "2026-08-14T09:39:46.232Z"
+      "lastUpdated": "2026-08-14T20:00:18.357Z"
     },
     {
       "id": "gemini-15",
@@ -111,7 +115,7 @@
       "adoption": null,
       "history": [],
       "changePct": null,
-      "lastUpdated": "2026-08-14T09:39:46.232Z"
+      "lastUpdated": "2026-08-14T20:00:18.357Z"
     },
     {
       "id": "claude-35-sonnet",
@@ -129,7 +133,7 @@
       "adoption": null,
       "history": [],
       "changePct": null,
-      "lastUpdated": "2026-08-14T09:39:46.232Z"
+      "lastUpdated": "2026-08-14T20:00:18.357Z"
     },
     {
       "id": "grok-3",
@@ -147,7 +151,7 @@
       "adoption": null,
       "history": [],
       "changePct": null,
-      "lastUpdated": "2026-08-14T09:39:46.232Z"
+      "lastUpdated": "2026-08-14T20:00:18.357Z"
     },
     {
       "id": "llama-33",
@@ -164,7 +168,7 @@
       },
       "adoption": {
         "metric": "github_stars",
-        "value": 7678,
+        "value": 7679,
         "sourceLabel": "★ GitHub stars",
         "sourceUrl": "https://github.com/meta-llama/llama-models"
       },
@@ -220,10 +224,14 @@
         {
           "ts": "2026-08-14T09:39:46.530Z",
           "value": 7678
+        },
+        {
+          "ts": "2026-08-14T20:00:18.657Z",
+          "value": 7679
         }
       ],
       "changePct": 0.1,
-      "lastUpdated": "2026-08-14T09:39:46.530Z"
+      "lastUpdated": "2026-08-14T20:00:18.657Z"
     },
     {
       "id": "cursor-ide",
@@ -241,7 +249,7 @@
       "adoption": null,
       "history": [],
       "changePct": null,
-      "lastUpdated": "2026-08-14T09:39:46.530Z"
+      "lastUpdated": "2026-08-14T20:00:18.657Z"
     }
   ]
 }
