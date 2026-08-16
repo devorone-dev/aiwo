@@ -57,6 +57,26 @@ function openRouterPricing(model) {
   };
 }
 
+// Model slugs get renamed/retired over time. `candidates` may be a single
+// string or an array of strings to try in order. We first check the bulk
+// catalog (fast, one request total), then fall back to the single-model
+// endpoint, which OpenRouter resolves aliases and redirects through — this
+// catches renamed/legacy slugs the bulk list snapshot might not include.
+async function resolveOpenRouterModel(candidates, catalog) {
+  const ids = Array.isArray(candidates) ? candidates : [candidates];
+  for (const id of ids) {
+    if (!id) continue;
+    if (catalog.has(id)) return catalog.get(id);
+    const single = await safeFetchJson(`https://openrouter.ai/api/v1/model/${id}`);
+    if (single?.data) {
+      console.log(`[openrouter] resolved "${id}" via alias lookup -> ${single.data.id}`);
+      return single.data;
+    }
+  }
+  console.warn(`[openrouter] no match for any of: ${ids.join(', ')}`);
+  return null;
+}
+
 function formatContext(n) {
   if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(n % 1_000_000 === 0 ? 0 : 1)}M`;
   if (n >= 1_000) return `${Math.round(n / 1000)}k`;
@@ -158,7 +178,9 @@ async function main() {
   const products = [];
   for (const item of config) {
     const prev = previousById.get(item.id);
-    const orModel = item.sources.openrouter ? openRouterCatalog.get(item.sources.openrouter) : null;
+    const orModel = item.sources.openrouter
+      ? await resolveOpenRouterModel(item.sources.openrouter, openRouterCatalog)
+      : null;
     const pricing = openRouterPricing(orModel) || {};
 
     const adoption = await resolveAdoptionSignal(item.sources);
