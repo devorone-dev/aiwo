@@ -35,7 +35,7 @@
     "description": "Google Gemini 1.5 features a groundbreaking 2M token context window, allowing seamless ingestion of massive video, audio, and large repositories for enterprise intelligence.",
     "pricingModel": "Freemium ($20/mo)",
     "sources": {
-      "openrouter": "google/gemini-pro-1.5",
+      "openrouter": ["google/gemini-pro-1.5", "google/gemini-1.5-pro", "google/gemini-2.5-pro"],
       "radarDomain": "gemini.google.com"
     }
   },
@@ -48,7 +48,7 @@
     "description": "Anthropic Claude 3.5 Sonnet sets the standard for autonomous coding, visual reasoning, and human-like nuanced content creation, backed by interactive web Artifacts.",
     "pricingModel": "Freemium ($20/mo)",
     "sources": {
-      "openrouter": "anthropic/claude-3.5-sonnet",
+      "openrouter": ["anthropic/claude-3.5-sonnet", "anthropic/claude-3-5-sonnet"],
       "radarDomain": "claude.ai"
     }
   },
@@ -61,7 +61,7 @@
     "description": "Grok 3 by xAI leverages real-time access to the X global real-time stream, powered by massive GPU clusters to deliver low-latency live web intelligence and code synthesis.",
     "pricingModel": "Subscription ($16/mo)",
     "sources": {
-      "openrouter": "x-ai/grok-2",
+      "openrouter": ["x-ai/grok-3", "x-ai/grok-2", "x-ai/grok-beta"],
       "radarDomain": "x.ai"
     }
   },
