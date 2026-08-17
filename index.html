@@ -3,23 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI World Order (AIWO) - Global AI Market Analytics</title>
+  <title>AI World Order (AIWO) - Live AI Model Catalog</title>
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='black'/><text x='50%' y='40%' dominant-baseline='central' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='900' font-size='38' letter-spacing='2'>AI</text><text x='50%' y='75%' dominant-baseline='central' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='900' font-size='38' letter-spacing='2'>WO</text></svg>">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='black'/><text x='50%25' y='40%25' dominant-baseline='central' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='900' font-size='38' letter-spacing='2'>AI</text><text x='50%25' y='75%25' dominant-baseline='central' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='900' font-size='38' letter-spacing='2'>WO</text></svg>">
 
-  <!-- Fonts: Space Grotesk (display) / Inter (body) / JetBrains Mono (data) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = { darkMode: 'class' };
-  </script>
+  <script>tailwind.config = { darkMode: 'class' };</script>
 
-  <!-- React & ReactDOM (cdnjs — unpkg is blocked in the artifact preview iframe) -->
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
 
@@ -34,98 +28,62 @@
       --line:#262832; --accent:#7C8CFF; --accent-soft:#1C2040;
       --positive:#3ED97A; --negative:#FF6B6B; --warn:#F0A93F;
     }
-    body{
-      background:var(--bg); color:var(--ink);
-      font-family:'Inter',ui-sans-serif,system-ui,sans-serif;
-      transition:background .25s ease, color .25s ease;
-    }
+    body{ background:var(--bg); color:var(--ink); font-family:'Inter',ui-sans-serif,system-ui,sans-serif; transition:background .25s ease, color .25s ease; }
     .font-display{ font-family:'Space Grotesk',sans-serif; }
     .font-mono{ font-family:'JetBrains Mono',ui-monospace,monospace; }
-    body.modal-open{ overflow:hidden; }
     .scrollbar-none::-webkit-scrollbar{ display:none; }
     .scrollbar-none{ -ms-overflow-style:none; scrollbar-width:none; }
-
     .surface{ background:var(--surface); border-color:var(--line); }
-    .ink{ color:var(--ink); }
-    .ink-soft{ color:var(--ink-soft); }
-    .line{ border-color:var(--line); }
-    .accent-text{ color:var(--accent); }
-    .accent-bg{ background:var(--accent); }
-    .accent-soft-bg{ background:var(--accent-soft); }
-
+    .ink{ color:var(--ink); } .ink-soft{ color:var(--ink-soft); } .line{ border-color:var(--line); }
+    .accent-text{ color:var(--accent); } .accent-bg{ background:var(--accent); } .accent-soft-bg{ background:var(--accent-soft); }
     @keyframes ticker-scroll{ from{ transform:translateX(0);} to{ transform:translateX(-50%);} }
-    .ticker-track{ animation:ticker-scroll 38s linear infinite; }
+    .ticker-track{ animation:ticker-scroll 45s linear infinite; }
     .ticker-wrap:hover .ticker-track{ animation-play-state:paused; }
-
-    .rail-fade-right::after{
-      content:''; position:absolute; top:0; right:0; bottom:0; width:2.5rem;
-      background:linear-gradient(to right, transparent, var(--bg));
-      pointer-events:none;
-    }
-    .rail-fade-left::before{
-      content:''; position:absolute; top:0; left:0; bottom:0; width:2.5rem;
-      background:linear-gradient(to left, transparent, var(--bg));
-      pointer-events:none; z-index:1;
-    }
-
+    .rail-fade-right::after{ content:''; position:absolute; top:0; right:0; bottom:0; width:2.5rem; background:linear-gradient(to right, transparent, var(--bg)); pointer-events:none; }
+    .rail-fade-left::before{ content:''; position:absolute; top:0; left:0; bottom:0; width:2.5rem; background:linear-gradient(to left, transparent, var(--bg)); pointer-events:none; z-index:1; }
     @media (prefers-reduced-motion: reduce){ .ticker-track{ animation:none; } }
     :focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
-
-    .sort-th{ cursor:pointer; user-select:none; }
-    .sort-th:hover{ color:var(--accent); }
+    .sort-th{ cursor:pointer; user-select:none; } .sort-th:hover{ color:var(--accent); }
     .row-link:hover .row-title{ color:var(--accent); }
-
     @keyframes pulse{ 0%,100%{ opacity:1; } 50%{ opacity:.4; } }
     .pulse{ animation:pulse 1.6s ease-in-out infinite; }
+    .pg-btn:disabled{ opacity:.35; cursor:not-allowed; }
   </style>
 </head>
 <body class="min-h-screen antialiased">
-
   <div id="root"></div>
 
   <script>
     const { useState, useMemo, useEffect, createElement: h } = React;
+    const PAGE_SIZE = 25;
 
-    const CATEGORIES = [
-      'All', 'Multimodal LLM', 'Reasoning LLM', 'Coding Assistants',
-      'AI Search', 'Vision/Video', 'Audio/Voice', 'Autonomous Agents',
-      'Workflow Automation', 'Open Source LLM'
-    ];
-
-    const CATEGORY_COLOR = {
-      'Multimodal LLM': '#3652FF',
-      'Reasoning LLM': '#8B5CF6',
-      'Coding Assistants': '#0EA5A0',
-      'AI Search': '#C8720A',
-      'Vision/Video': '#DB2777',
-      'Audio/Voice': '#0284C7',
-      'Autonomous Agents': '#DC2626',
-      'Workflow Automation': '#65A30D',
-      'Open Source LLM': '#17A34A'
-    };
-
-    const BADGE_STYLE = {
-      'Market Leader': { fg:'#15161A', bg:'#E9E9E6' },
-      'Disruptor':      { fg:'#9A4D07', bg:'#FBEBD6' },
-      'Top Choice':     { fg:'#0E6B67', bg:'#DCF3F1' },
-      'Dev Choice':     { fg:'#5B21B6', bg:'#EEE6FB' },
-      'Rising Star':    { fg:'#1E40AF', bg:'#E1E9FE' },
-      'Open Source':    { fg:'#0F6B2C', bg:'#DDF3E3' }
-    };
-
-    function initials(name){
-      const clean = name.replace(/\(.*?\)/g,'').trim();
-      const parts = clean.split(/[\s/]+/).filter(Boolean);
-      if(parts.length === 1) return parts[0].slice(0,2).toUpperCase();
-      return (parts[0][0] + parts[1][0]).toUpperCase();
+    function hashHue(str){
+      let hash = 0;
+      for(let i=0;i<str.length;i++) hash = (hash*31 + str.charCodeAt(i)) % 360;
+      return hash;
     }
-
+    function providerColor(provider){
+      const hue = hashHue(provider || '');
+      return { text:`hsl(${hue},60%,42%)`, bg:`hsla(${hue},60%,45%,0.13)` };
+    }
+    function initials(name){
+      const clean = (name||'').replace(/\(.*?\)/g,'').trim();
+      const parts = clean.split(/[\s/:]+/).filter(Boolean);
+      if(parts.length === 1) return parts[0].slice(0,2).toUpperCase();
+      return (parts[0][0] + (parts[1]?.[0]||'')).toUpperCase();
+    }
     function priceValue(str){
       if(!str) return null;
-      const n = parseFloat(String(str).replace(/[^0-9.]/g, ''));
+      const n = parseFloat(String(str).replace(/[^0-9.]/g,''));
       return isNaN(n) ? null : n;
     }
-
+    function contextValue(str){
+      if(!str) return null;
+      const n = parseFloat(str);
+      if(str.includes('M')) return n*1_000_000;
+      if(str.includes('k')) return n*1_000;
+      return n;
+    }
     function formatAdoptionValue(adoption){
       if(!adoption || typeof adoption.value !== 'number') return null;
       const v = adoption.value;
@@ -133,83 +91,63 @@
       if(v >= 1_000) return `${(v/1_000).toFixed(1)}k`;
       return String(v);
     }
-
     function timeAgo(iso){
       if(!iso) return 'never';
       const diffMs = Date.now() - new Date(iso).getTime();
-      const h = Math.floor(diffMs / 3_600_000);
-      if(h < 1) return 'just now';
-      if(h < 24) return `${h}h ago`;
-      return `${Math.floor(h/24)}d ago`;
+      const hrs = Math.floor(diffMs/3_600_000);
+      if(hrs < 1) return 'just now';
+      if(hrs < 24) return `${hrs}h ago`;
+      return `${Math.floor(hrs/24)}d ago`;
+    }
+    function formatDate(iso){
+      if(!iso) return '—';
+      return new Date(iso).toLocaleDateString(undefined,{ year:'numeric', month:'short', day:'numeric' });
+    }
+    function displayName(m){
+      return m.name.includes(':') ? m.name.split(':').slice(1).join(':').trim() : m.name;
     }
 
     function Sparkline({ data, color }){
-      if(!data || data.length < 2){
-        return h('span', { className:'text-[10px] ink-soft font-mono' }, 'gathering…');
-      }
-      const w = 88, hgt = 28, pad = 3;
-      const max = Math.max(...data), min = Math.min(...data);
-      const span = (max - min) || 1;
-      const step = (w - pad*2) / (data.length - 1);
-      const points = data.map((v,i) => {
-        const x = pad + i*step;
-        const y = hgt - pad - ((v-min)/span) * (hgt - pad*2);
-        return `${x.toFixed(1)},${y.toFixed(1)}`;
-      }).join(' ');
-      const areaPoints = `${pad},${hgt-pad} ${points} ${w-pad},${hgt-pad}`;
+      if(!data || data.length < 2) return h('span', { className:'text-[10px] ink-soft font-mono' }, 'gathering…');
+      const w=88,hgt=28,pad=3;
+      const max=Math.max(...data), min=Math.min(...data), span=(max-min)||1;
+      const step=(w-pad*2)/(data.length-1);
+      const points = data.map((v,i)=>{ const x=pad+i*step; const y=hgt-pad-((v-min)/span)*(hgt-pad*2); return `${x.toFixed(1)},${y.toFixed(1)}`; }).join(' ');
+      const area = `${pad},${hgt-pad} ${points} ${w-pad},${hgt-pad}`;
       return h('svg', { width:w, height:hgt, viewBox:`0 0 ${w} ${hgt}`, className:'shrink-0' },
-        h('polyline', { points:areaPoints, fill:color, opacity:0.12, stroke:'none' }),
+        h('polyline', { points:area, fill:color, opacity:0.12, stroke:'none' }),
         h('polyline', { points, fill:'none', stroke:color, strokeWidth:1.75, strokeLinecap:'round', strokeLinejoin:'round' })
       );
     }
-
-    function ProgressBar({ pct, color }){
-      return h('div', { className:'w-full h-1.5 rounded-full overflow-hidden', style:{ background:'var(--line)' } },
-        h('div', { className:'h-full rounded-full', style:{ width:`${Math.min(100, Math.max(0,pct))}%`, background:color } })
-      );
+    function Avatar({ name, provider, size }){
+      const c = providerColor(provider);
+      const dim = size==='lg' ? 'w-14 h-14 text-sm rounded-2xl' : 'w-9 h-9 text-[11px] rounded-xl';
+      return h('div', { className:`${dim} flex items-center justify-center font-bold font-mono shrink-0`, style:{ background:c.bg, color:c.text } }, initials(name));
     }
-
-    function Avatar({ name, category, size }){
-      const color = CATEGORY_COLOR[category] || '#6B6D76';
-      const dim = size === 'lg' ? 'w-14 h-14 text-sm rounded-2xl' : 'w-9 h-9 text-[11px] rounded-xl';
-      return h('div', {
-        className:`${dim} flex items-center justify-center font-bold font-mono shrink-0`,
-        style:{ background: color + '1F', color }
-      }, initials(name));
+    function ProviderTag({ provider }){
+      const c = providerColor(provider);
+      return h('span', { className:'text-xs px-2.5 py-1 rounded-lg font-medium capitalize', style:{ color:c.text, background:c.bg } }, provider);
     }
-
-    function Badge({ label }){
-      const s = BADGE_STYLE[label] || { fg:'var(--ink-soft)', bg:'var(--line)' };
-      return h('span', {
-        className:'text-[10px] font-semibold px-2 py-0.5 rounded-full',
-        style:{ color:s.fg, background:s.bg }
-      }, label);
-    }
-
     function SortArrow({ active, direction }){
       if(!active) return h('span', { className:'inline-block ml-1 opacity-25' }, '↕');
-      return h('span', { className:'inline-block ml-1 accent-text' }, direction === 'asc' ? '↑' : '↓');
+      return h('span', { className:'inline-block ml-1 accent-text' }, direction==='asc' ? '↑' : '↓');
     }
 
-    function Ticker({ items }){
-      const withChange = items.filter(p => typeof p.changePct === 'number');
-      if(withChange.length === 0){
+    function Ticker({ products }){
+      const newest = [...products].filter(p=>p.createdAt).sort((a,b)=> new Date(b.createdAt)-new Date(a.createdAt)).slice(0,15);
+      if(newest.length === 0){
         return h('div', { className:'ticker-wrap relative overflow-hidden border-b line surface' },
-          h('div', { className:'py-2 px-6 text-xs font-mono ink-soft' }, 'Live data syncing — real numbers appear after the first automated update.')
-        );
+          h('div', { className:'py-2 px-6 text-xs font-mono ink-soft' }, 'Live catalog syncing…'));
       }
-      const loop = withChange.concat(withChange);
+      const loop = newest.concat(newest);
       return h('div', { className:'ticker-wrap relative overflow-hidden border-b line surface' },
         h('div', { className:'ticker-track flex items-center gap-8 py-2 px-6 whitespace-nowrap w-max' },
-          loop.map((item, i) =>
-            h('div', { key:i, className:'flex items-center gap-2 font-mono text-xs' },
-              h('span', { className:'font-semibold ink' }, item.name.split(' (')[0]),
-              h('span', { style:{ color: item.changePct >= 0 ? 'var(--positive)' : 'var(--negative)' }, className:'font-semibold' },
-                `${item.changePct >= 0 ? '+' : ''}${item.changePct}%`
-              ),
-              h('span', { className:'ink-soft' }, '·')
-            )
-          )
+          loop.map((item,i)=> h('div', { key:i, className:'flex items-center gap-2 font-mono text-xs' },
+            h('span', { className:'ink-soft' }, '🆕'),
+            h('span', { className:'font-semibold ink' }, displayName(item)),
+            h('span', { className:'ink-soft' }, `· ${formatDate(item.createdAt)}`),
+            h('span', { className:'ink-soft' }, '·')
+          ))
         )
       );
     }
@@ -218,383 +156,297 @@
       return h('header', { className:'flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-6 border-b line mb-8' },
         h('div', null,
           h('div', { className:'flex items-center gap-3' },
-            h('button', {
-              onClick: onLogoClick,
-              className:'accent-bg text-white px-3 py-1.5 rounded-xl font-display font-bold text-xl tracking-wide hover:opacity-90 transition-opacity'
-            }, 'AIWO'),
+            h('button', { onClick:onLogoClick, className:'accent-bg text-white px-3 py-1.5 rounded-xl font-display font-bold text-xl tracking-wide hover:opacity-90 transition-opacity' }, 'AIWO'),
             h('h1', { className:'text-2xl font-display font-bold ink' }, 'AI World Order')
           ),
           breadcrumb
             ? h('div', { className:'flex items-center gap-2 text-sm mt-2' },
                 h('button', { onClick:onLogoClick, className:'ink-soft hover:accent-text font-medium' }, '← Back to Catalog'),
                 h('span', { className:'ink-soft' }, '/'),
-                h('span', { className:'ink font-medium truncate max-w-xs' }, breadcrumb)
-              )
-            : h('p', { className:'text-sm ink-soft mt-1' }, 'Global AI Market Analytics & Telemetry')
-        ),
-        h('nav', { className:'hidden lg:flex items-center gap-6 text-sm font-medium ink-soft' },
-          h('a', { href:'#', onClick:(e)=>{e.preventDefault(); onLogoClick();}, className:'hover:accent-text transition-colors' }, 'Catalog'),
-          h('a', { href:'#', className:'hover:accent-text transition-colors' }, 'Categories'),
-          h('a', { href:'#', className:'hover:accent-text transition-colors' }, 'API'),
-          h('a', { href:'#', className:'hover:accent-text transition-colors' }, 'About')
+                h('span', { className:'ink font-medium truncate max-w-xs' }, breadcrumb))
+            : h('p', { className:'text-sm ink-soft mt-1' }, 'Live AI Model Catalog — mirrored from OpenRouter, twice a day')
         ),
         h('div', { className:'flex items-center gap-3 w-full md:w-auto' },
           showSearch && h('div', { className:'relative flex-1 md:w-80' },
             h('svg', { className:'absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 ink-soft', viewBox:'0 0 24 24', fill:'none', stroke:'currentColor', strokeWidth:2 },
-              h('circle', { cx:11, cy:11, r:7 }), h('line', { x1:21, y1:21, x2:16.65, y2:16.65 })
-            ),
+              h('circle', { cx:11, cy:11, r:7 }), h('line', { x1:21, y1:21, x2:16.65, y2:16.65 })),
             h('input', {
-              type: 'text',
-              placeholder: 'Search AI Platform (Gemini, ChatGPT...)',
-              value: searchQuery,
-              onChange: (e) => setSearchQuery(e.target.value),
-              className: 'block w-full pl-9 pr-9 py-2 border rounded-xl surface ink text-sm focus:outline-none focus:ring-2',
-              style: { borderColor:'var(--line)' }
+              type:'text', placeholder:'Search model or provider (gpt, llama, deepseek...)',
+              value:searchQuery, onChange:(e)=>setSearchQuery(e.target.value),
+              className:'block w-full pl-9 pr-9 py-2 border rounded-xl surface ink text-sm focus:outline-none focus:ring-2', style:{ borderColor:'var(--line)' }
             }),
-            searchQuery && h('button', {
-              onClick: () => setSearchQuery(''),
-              className: 'absolute inset-y-0 right-0 pr-3 flex items-center text-xs ink-soft hover:accent-text'
-            }, '✕')
+            searchQuery && h('button', { onClick:()=>setSearchQuery(''), className:'absolute inset-y-0 right-0 pr-3 flex items-center text-xs ink-soft hover:accent-text' }, '✕')
           ),
           h('button', {
-            onClick: () => setDark(d => !d),
-            'aria-label': 'Toggle dark mode',
-            className: 'shrink-0 w-9 h-9 flex items-center justify-center rounded-xl border surface ink hover:accent-text transition-colors',
-            style: { borderColor:'var(--line)' }
+            onClick:()=>setDark(d=>!d), 'aria-label':'Toggle dark mode',
+            className:'shrink-0 w-9 h-9 flex items-center justify-center rounded-xl border surface ink hover:accent-text transition-colors', style:{ borderColor:'var(--line)' }
           }, dark ? '☀' : '☾')
         )
       );
     }
 
-    function DetailPage({ platform, dark, setDark, onBack }){
-      const color = CATEGORY_COLOR[platform.category] || 'var(--accent)';
-      const historyValues = (platform.history || []).map(pt => pt.value);
+    function DetailPage({ model, dark, setDark, onBack }){
+      const c = providerColor(model.provider);
+      const historyValues = (model.history||[]).map(pt=>pt.value);
       return h('div', { className:'max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8' },
-        h(SiteHeader, { dark, setDark, showSearch:false, breadcrumb: platform.name, onLogoClick: onBack }),
-
+        h(SiteHeader, { dark, setDark, showSearch:false, breadcrumb:displayName(model), onLogoClick:onBack }),
         h('div', { className:'flex items-start gap-4 mb-8' },
-          h(Avatar, { name:platform.name, category:platform.category, size:'lg' }),
+          h(Avatar, { name:model.name, provider:model.provider, size:'lg' }),
           h('div', { className:'min-w-0' },
             h('div', { className:'flex items-center gap-2 flex-wrap' },
-              h('span', { className:'text-xs font-bold uppercase tracking-wider', style:{ color } }, platform.category),
-              platform.badge && h(Badge, { label:platform.badge })
+              h('span', { className:'text-xs font-bold uppercase tracking-wider capitalize', style:{ color:c.text } }, model.provider),
+              model.badge && h('span', { className:'text-[10px] font-semibold px-2 py-0.5 rounded-full accent-soft-bg accent-text' }, model.badge),
+              model.hfId && h('span', { className:'text-[10px] font-semibold px-2 py-0.5 rounded-full', style:{ color:'var(--positive)', background:'var(--accent-soft)' } }, 'Open weight')
             ),
-            h('h2', { className:'text-3xl font-display font-bold ink mt-1' }, platform.name),
-            h('a', { href:platform.url, target:'_blank', className:'text-sm ink-soft hover:accent-text hover:underline font-mono' }, platform.url.replace('https://',''))
+            h('h2', { className:'text-3xl font-display font-bold ink mt-1' }, displayName(model)),
+            h('p', { className:'text-sm ink-soft font-mono' }, model.id)
           )
         ),
-
         h('div', { className:'grid grid-cols-1 lg:grid-cols-3 gap-6' },
           h('div', { className:'lg:col-span-2 space-y-6' },
-            h('div', { className:'surface border line rounded-2xl p-6' },
-              h('h3', { className:'text-xs font-semibold ink-soft uppercase tracking-wider mb-2' }, 'Platform Overview'),
-              h('p', { className:'text-sm ink-soft leading-relaxed' }, platform.description)
+            model.description && h('div', { className:'surface border line rounded-2xl p-6' },
+              h('h3', { className:'text-xs font-semibold ink-soft uppercase tracking-wider mb-2' }, 'Overview'),
+              h('p', { className:'text-sm ink-soft leading-relaxed' }, model.description)
             ),
             h('div', { className:'surface border line rounded-2xl p-6' },
-              h('h3', { className:'text-xs font-semibold ink-soft uppercase tracking-wider mb-4' }, 'Adoption Trend'),
-              h(Sparkline, { data: historyValues, color }),
-              platform.adoption
+              h('h3', { className:'text-xs font-semibold ink-soft uppercase tracking-wider mb-4' }, 'Adoption (Hugging Face downloads)'),
+              h(Sparkline, { data:historyValues, color:c.text }),
+              model.adoption
                 ? h('p', { className:'text-xs ink-soft mt-3 font-mono' },
-                    `${formatAdoptionValue(platform.adoption)} · ${platform.adoption.sourceLabel}`,
-                    typeof platform.changePct === 'number' ? ` · ${platform.changePct >= 0 ? '+' : ''}${platform.changePct}% since tracking began` : ''
-                  )
-                : h('p', { className:'text-xs ink-soft mt-3' }, 'No public adoption data source available for this product yet.'),
-              platform.adoption?.sourceUrl && h('a', {
-                href: platform.adoption.sourceUrl, target:'_blank',
-                className:'inline-block mt-2 text-xs accent-text hover:underline'
-              }, 'View source →')
+                    `${formatAdoptionValue(model.adoption)} · ${model.adoption.sourceLabel}`,
+                    typeof model.changePct === 'number' ? ` · ${model.changePct>=0?'+':''}${model.changePct}% since tracking began` : '')
+                : h('p', { className:'text-xs ink-soft mt-3' }, 'No public data — this model has no Hugging Face repo linked on OpenRouter.'),
+              model.adoption?.sourceUrl && h('a', { href:model.adoption.sourceUrl, target:'_blank', className:'inline-block mt-2 text-xs accent-text hover:underline' }, 'View on Hugging Face →')
             )
           ),
-
           h('div', { className:'space-y-6' },
             h('div', { className:'surface border line rounded-2xl p-6' },
-              h('h3', { className:'text-xs font-semibold ink-soft uppercase tracking-wider mb-4' }, 'Technical Specs'),
+              h('h3', { className:'text-xs font-semibold ink-soft uppercase tracking-wider mb-4' }, 'Specs'),
               h('div', { className:'space-y-3 text-sm' },
-                h('div', { className:'flex justify-between' }, h('span', { className:'ink-soft' }, 'Context Window'), h('span', { className:'font-semibold ink font-mono' }, platform.tech.contextWindow || '—')),
-                h('div', { className:'flex justify-between' }, h('span', { className:'ink-soft' }, 'Adoption Signal'), h('span', { className:'font-semibold ink font-mono' }, formatAdoptionValue(platform.adoption) || '—'))
+                h('div', { className:'flex justify-between' }, h('span', { className:'ink-soft' }, 'Context Window'), h('span', { className:'font-semibold ink font-mono' }, model.tech.contextWindow || '—')),
+                h('div', { className:'flex justify-between' }, h('span', { className:'ink-soft' }, 'Released'), h('span', { className:'font-semibold ink font-mono' }, formatDate(model.createdAt)))
               )
             ),
             h('div', { className:'surface border line rounded-2xl p-6' },
-              h('h3', { className:'text-xs font-semibold ink-soft uppercase tracking-wider mb-4' }, 'Pricing'),
+              h('h3', { className:'text-xs font-semibold ink-soft uppercase tracking-wider mb-4' }, 'Pricing (per 1M tokens)'),
               h('div', { className:'space-y-3 text-sm' },
-                h('div', { className:'flex justify-between' }, h('span', { className:'ink-soft' }, 'Model'), h('span', { className:'font-semibold ink text-right' }, platform.tech.pricingModel || '—')),
-                h('div', { className:'flex justify-between' }, h('span', { className:'ink-soft' }, 'Input / 1M'), h('span', { className:'font-semibold ink font-mono' }, platform.tech.costInput1M || '—')),
-                h('div', { className:'flex justify-between' }, h('span', { className:'ink-soft' }, 'Output / 1M'), h('span', { className:'font-semibold ink font-mono' }, platform.tech.costOutput1M || '—'))
+                h('div', { className:'flex justify-between' }, h('span', { className:'ink-soft' }, 'Input'), h('span', { className:'font-semibold ink font-mono' }, model.tech.costInput1M || '—')),
+                h('div', { className:'flex justify-between' }, h('span', { className:'ink-soft' }, 'Output'), h('span', { className:'font-semibold ink font-mono' }, model.tech.costOutput1M || '—'))
               )
             ),
             h('div', { className:'surface border line rounded-2xl p-6 text-xs ink-soft space-y-1' },
               h('p', { className:'font-semibold ink-soft uppercase tracking-wider text-[10px] mb-2' }, 'Data provenance'),
-              h('p', null, `Pricing/context: OpenRouter Models API`),
-              h('p', null, platform.adoption ? `Adoption: ${platform.adoption.sourceLabel}` : 'Adoption: no source configured'),
-              h('p', null, `Last updated: ${timeAgo(platform.lastUpdated)}`)
+              h('p', null, 'Pricing/context/release date: OpenRouter Models API'),
+              h('p', null, model.adoption ? `Adoption: ${model.adoption.sourceLabel}` : 'Adoption: no Hugging Face repo linked')
             ),
-            h('a', { href:platform.url, target:'_blank', className:'block w-full py-3 text-white text-center rounded-xl font-bold hover:opacity-90 transition-all accent-bg' }, 'Visit Platform Website ↗')
+            h('a', { href:model.openrouterUrl, target:'_blank', className:'block w-full py-3 text-white text-center rounded-xl font-bold hover:opacity-90 transition-all accent-bg' }, 'View on OpenRouter ↗')
           )
         )
       );
     }
 
-    function CatalogPage({ dark, setDark, searchQuery, setSearchQuery, selectedCategory, setSelectedCategory, sort, setSort, products, generatedAt, onOpen }){
-
-      const withAdoption = products.filter(p => p.adoption && typeof p.adoption.value === 'number');
-      const withChange = products.filter(p => typeof p.changePct === 'number');
-      const topMover = withChange.length
-        ? withChange.reduce((a,b) => a.changePct > b.changePct ? a : b)
-        : null;
+    function CatalogPage({ dark, setDark, searchQuery, setSearchQuery, selectedProvider, setSelectedProvider, sort, setSort, page, setPage, data, onOpen }){
+      const products = data.products;
+      const providerPills = ['All', ...data.providers.slice(0, 14).map(p=>p.name)];
 
       function toggleSort(key){
-        setSort(prev => prev.key === key
-          ? { key, direction: prev.direction === 'asc' ? 'desc' : 'asc' }
-          : { key, direction: 'desc' });
+        setSort(prev => prev.key===key ? { key, direction: prev.direction==='asc'?'desc':'asc' } : { key, direction:'desc' });
       }
-
       const SORTERS = {
-        category: (it) => it.category,
-        adoption: (it) => (it.adoption ? it.adoption.value : -1),
-        trend: (it) => (typeof it.changePct === 'number' ? it.changePct : -Infinity),
-        price: (it) => priceValue(it.tech.costInput1M) ?? -1
+        provider: (m)=>m.provider,
+        context: (m)=>contextValue(m.tech.contextWindow) ?? -1,
+        priceIn: (m)=>priceValue(m.tech.costInput1M) ?? -1,
+        adoption: (m)=>(m.adoption ? m.adoption.value : -1),
+        released: (m)=>m.createdAt ? new Date(m.createdAt).getTime() : -1
       };
 
-      const filteredData = useMemo(() => {
-        let rows = products.filter(item => {
-          const matchesCategory = selectedCategory === 'All' || item.category === selectedCategory;
-          const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                                item.category.toLowerCase().includes(searchQuery.toLowerCase());
-          return matchesCategory && matchesSearch;
+      const filtered = useMemo(() => {
+        let rows = products.filter(m => {
+          const matchesProvider = selectedProvider==='All' || m.provider===selectedProvider;
+          const q = searchQuery.toLowerCase();
+          const matchesSearch = m.name.toLowerCase().includes(q) || m.id.toLowerCase().includes(q) || m.provider.toLowerCase().includes(q);
+          return matchesProvider && matchesSearch;
         });
         if(sort.key){
           const getVal = SORTERS[sort.key];
-          rows = [...rows].sort((a,b) => {
-            const va = getVal(a), vb = getVal(b);
-            if(typeof va === 'string') return sort.direction === 'asc' ? va.localeCompare(vb) : vb.localeCompare(va);
-            return sort.direction === 'asc' ? va - vb : vb - va;
+          rows = [...rows].sort((a,b)=>{
+            const va=getVal(a), vb=getVal(b);
+            if(typeof va==='string') return sort.direction==='asc' ? va.localeCompare(vb) : vb.localeCompare(va);
+            return sort.direction==='asc' ? va-vb : vb-va;
           });
         }
         return rows;
-      }, [products, selectedCategory, searchQuery, sort]);
+      }, [products, selectedProvider, searchQuery, sort]);
+
+      useEffect(()=>{ setPage(1); }, [selectedProvider, searchQuery, sort]);
+
+      const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+      const pageRows = filtered.slice((page-1)*PAGE_SIZE, page*PAGE_SIZE);
 
       function ThSort({ label, sortKey }){
-        const active = sort.key === sortKey;
-        return h('th', { className:'py-4 px-4 sort-th', onClick: () => toggleSort(sortKey) },
-          h('span', { className:'inline-flex items-center' }, label, h(SortArrow, { active, direction: sort.direction }))
-        );
+        const active = sort.key===sortKey;
+        return h('th', { className:'py-4 px-4 sort-th', onClick:()=>toggleSort(sortKey) },
+          h('span', { className:'inline-flex items-center' }, label, h(SortArrow, { active, direction:sort.direction })));
       }
 
-      return h('div', { className:'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8' },
+      const withAdoption = products.filter(m=>m.adoption);
 
+      return h('div', { className:'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8' },
         h(SiteHeader, { dark, setDark, searchQuery, setSearchQuery, showSearch:true, breadcrumb:null, onLogoClick:()=>{} }),
 
-        // TOP STATS CARDS — every number here is real, derived from data.json
         h('div', { className:'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8' },
           h('div', { className:'p-5 rounded-2xl border surface shadow-sm' },
-            h('p', { className:'text-xs font-semibold ink-soft uppercase tracking-wider' }, 'Tracked Platforms'),
-            h('div', { className:'flex items-baseline gap-2 mt-2' },
-              h('span', { className:'text-2xl font-display font-bold ink' }, products.length)
-            ),
-            h('p', { className:'text-xs ink-soft mt-1' }, 'Products in the catalog')
+            h('p', { className:'text-xs font-semibold ink-soft uppercase tracking-wider' }, 'Models Tracked'),
+            h('div', { className:'flex items-baseline gap-2 mt-2' }, h('span', { className:'text-2xl font-display font-bold ink' }, data.totalModels)),
+            h('p', { className:'text-xs ink-soft mt-1' }, 'Full live OpenRouter catalog')
           ),
           h('div', { className:'p-5 rounded-2xl border surface shadow-sm' },
-            h('p', { className:'text-xs font-semibold ink-soft uppercase tracking-wider' }, 'Live Data Points'),
-            h('div', { className:'flex items-baseline gap-2 mt-2' },
-              h('span', { className:'text-2xl font-display font-bold ink' }, `${withAdoption.length}/${products.length}`)
-            ),
-            h('p', { className:'text-xs ink-soft mt-1' }, 'Platforms with a sourced adoption signal')
+            h('p', { className:'text-xs font-semibold ink-soft uppercase tracking-wider' }, 'Open-Weight Models'),
+            h('div', { className:'flex items-baseline gap-2 mt-2' }, h('span', { className:'text-2xl font-display font-bold ink' }, `${withAdoption.length}/${data.openWeightModels}`)),
+            h('p', { className:'text-xs ink-soft mt-1' }, 'With real Hugging Face download data')
+          ),
+          h('div', { className:'p-5 rounded-2xl border surface shadow-sm' },
+            h('p', { className:'text-xs font-semibold ink-soft uppercase tracking-wider' }, 'Providers'),
+            h('div', { className:'flex items-baseline gap-2 mt-2' }, h('span', { className:'text-2xl font-display font-bold ink' }, data.providers.length)),
+            h('p', { className:'text-xs ink-soft mt-1' }, 'Distinct model providers')
           ),
           h('div', { className:'p-5 rounded-2xl border surface shadow-sm' },
             h('p', { className:'text-xs font-semibold ink-soft uppercase tracking-wider' }, 'Last Synced'),
             h('div', { className:'flex items-baseline gap-2 mt-2' },
-              h('span', { className:'text-2xl font-display font-bold ink' }, timeAgo(generatedAt)),
-              h('span', { className:'text-xs font-semibold font-mono px-2 py-0.5 rounded-md accent-soft-bg accent-text' }, '2x/day')
-            ),
+              h('span', { className:'text-2xl font-display font-bold ink' }, timeAgo(data.generatedAt)),
+              h('span', { className:'text-xs font-semibold font-mono px-2 py-0.5 rounded-md accent-soft-bg accent-text' }, '2x/day')),
             h('p', { className:'text-xs ink-soft mt-1' }, 'Auto-refreshed by GitHub Actions')
-          ),
-          h('div', { className:'p-5 rounded-2xl border surface shadow-sm' },
-            h('p', { className:'text-xs font-semibold ink-soft uppercase tracking-wider mb-2' }, 'Top Mover'),
-            topMover
-              ? h('div', { className:'flex items-center gap-3' },
-                  h(Avatar, { name: topMover.name, category: topMover.category }),
-                  h('div', { className:'min-w-0' },
-                    h('p', { className:'text-sm font-semibold ink truncate' }, topMover.name.split(' (')[0]),
-                    h('p', { className:'text-xs font-mono font-semibold', style:{ color:'var(--positive)' } }, `+${topMover.changePct}%`)
-                  )
-                )
-              : h('p', { className:'text-xs ink-soft' }, 'Not enough history yet')
           )
         ),
 
-        // CATEGORY BUTTONS
         h('div', { className:'relative rail-fade-right rail-fade-left mb-6' },
           h('div', { className:'flex items-center gap-2 overflow-x-auto pb-4 scrollbar-none' },
-            CATEGORIES.map(cat =>
-              h('button', {
-                key: cat,
-                onClick: () => setSelectedCategory(cat),
-                className: `px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all border`,
-                style: selectedCategory === cat
-                  ? { background:'var(--ink)', color:'var(--surface)', borderColor:'var(--ink)' }
-                  : { background:'var(--surface)', color:'var(--ink-soft)', borderColor:'var(--line)' }
-              }, cat)
-            )
+            providerPills.map(p => h('button', {
+              key:p, onClick:()=>setSelectedProvider(p),
+              className:'px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all border capitalize',
+              style: selectedProvider===p
+                ? { background:'var(--ink)', color:'var(--surface)', borderColor:'var(--ink)' }
+                : { background:'var(--surface)', color:'var(--ink-soft)', borderColor:'var(--line)' }
+            }, p))
           )
         ),
 
-        // DESKTOP TABLE
-        h('div', { className:'hidden md:block surface border line rounded-2xl shadow-sm overflow-hidden mb-12' },
+        h('div', { className:'hidden md:block surface border line rounded-2xl shadow-sm overflow-hidden mb-6' },
           h('div', { className:'overflow-x-auto' },
             h('table', { className:'w-full text-left border-collapse' },
               h('thead', null,
                 h('tr', { className:'border-b line text-[11px] font-bold ink-soft uppercase tracking-wider', style:{ background:'var(--accent-soft)' } },
-                  h('th', { className:'py-4 px-6' }, 'Platform / AI Product'),
-                  h(ThSort, { label:'Category', sortKey:'category' }),
-                  h(ThSort, { label:'Adoption Signal', sortKey:'adoption' }),
-                  h(ThSort, { label:'Trend', sortKey:'trend' }),
-                  h('th', { className:'py-4 px-4' }, 'Pricing Model'),
-                  h(ThSort, { label:'Price (1M Tokens)', sortKey:'price' })
+                  h('th', { className:'py-4 px-6' }, 'Model'),
+                  h(ThSort, { label:'Provider', sortKey:'provider' }),
+                  h(ThSort, { label:'Context', sortKey:'context' }),
+                  h(ThSort, { label:'Adoption', sortKey:'adoption' }),
+                  h('th', { className:'py-4 px-4' }, 'Trend'),
+                  h(ThSort, { label:'Price In (1M)', sortKey:'priceIn' }),
+                  h('th', { className:'py-4 px-4' }, 'Price Out (1M)'),
+                  h(ThSort, { label:'Released', sortKey:'released' })
                 )
               ),
               h('tbody', { className:'divide-y', style:{ borderColor:'var(--line)' } },
-                filteredData.length > 0 ? filteredData.map(item =>
-                  h('tr', {
-                      key: item.id,
-                      onClick: () => onOpen(item.id),
-                      className:'row-link hover:bg-black/[0.02] transition-colors cursor-pointer'
-                    },
+                pageRows.length>0 ? pageRows.map(m =>
+                  h('tr', { key:m.id, onClick:()=>onOpen(m.id), className:'row-link hover:bg-black/[0.02] transition-colors cursor-pointer' },
                     h('td', { className:'py-4 px-6' },
                       h('div', { className:'flex items-center gap-3' },
-                        h(Avatar, { name:item.name, category:item.category }),
+                        h(Avatar, { name:m.name, provider:m.provider }),
                         h('div', { className:'min-w-0' },
                           h('div', { className:'font-bold ink flex items-center gap-2' },
-                            h('span', { className:'truncate row-title transition-colors' }, item.name),
-                            item.badge && h(Badge, { label:item.badge })
+                            h('span', { className:'truncate row-title transition-colors' }, displayName(m)),
+                            m.hfId && h('span', { className:'text-[9px] font-semibold px-1.5 py-0.5 rounded-full', style:{ color:'var(--positive)', background:'var(--accent-soft)' } }, 'OW')
                           ),
-                          h('a', {
-                            href:item.url, target:'_blank',
-                            onClick:(e)=>e.stopPropagation(),
-                            className:'text-xs ink-soft hover:accent-text hover:underline font-mono'
-                          }, item.url.replace('https://', ''))
+                          h('span', { className:'text-xs ink-soft font-mono' }, m.id)
                         )
                       )
                     ),
-                    h('td', { className:'py-4 px-4' },
-                      h('span', {
-                        className:'text-xs px-2.5 py-1 rounded-lg font-medium',
-                        style:{ color: CATEGORY_COLOR[item.category], background: (CATEGORY_COLOR[item.category]||'#6B6D76') + '17' }
-                      }, item.category)
-                    ),
+                    h('td', { className:'py-4 px-4' }, h(ProviderTag, { provider:m.provider })),
+                    h('td', { className:'py-4 px-4 text-xs ink font-mono font-medium' }, m.tech.contextWindow || '—'),
                     h('td', { className:'py-4 px-4 font-mono' },
-                      item.adoption
-                        ? h(React.Fragment, null,
-                            h('div', { className:'font-bold ink' }, formatAdoptionValue(item.adoption)),
-                            h('div', { className:'text-[11px] ink-soft' }, item.adoption.sourceLabel)
-                          )
+                      m.adoption
+                        ? h(React.Fragment, null, h('div', { className:'font-bold ink' }, formatAdoptionValue(m.adoption)), h('div', { className:'text-[11px] ink-soft' }, 'HF downloads'))
                         : h('span', { className:'text-xs ink-soft' }, 'No public data')
                     ),
-                    h('td', { className:'py-4 px-4' }, h(Sparkline, { data:(item.history||[]).map(pt=>pt.value), color: CATEGORY_COLOR[item.category] || 'var(--accent)' })),
-                    h('td', { className:'py-4 px-4 text-xs ink font-medium' }, item.tech.pricingModel || '—'),
-                    h('td', { className:'py-4 px-4 text-xs font-mono' },
-                      h('div', null,
-                        h('span', { className:'ink font-medium' }, `In: ${item.tech.costInput1M || '—'}`),
-                        h('span', { className:'ink-soft block text-[10px]' }, `Out: ${item.tech.costOutput1M || '—'}`)
-                      )
-                    )
+                    h('td', { className:'py-4 px-4' }, h(Sparkline, { data:(m.history||[]).map(pt=>pt.value), color:providerColor(m.provider).text })),
+                    h('td', { className:'py-4 px-4 text-xs ink font-mono font-medium' }, m.tech.costInput1M || '—'),
+                    h('td', { className:'py-4 px-4 text-xs ink font-mono font-medium' }, m.tech.costOutput1M || '—'),
+                    h('td', { className:'py-4 px-4 text-xs ink-soft font-mono' }, formatDate(m.createdAt))
                   )
-                ) : h('tr', null,
-                  h('td', { colSpan: 6, className:'py-8 text-center ink-soft text-sm' }, `No platforms found for "${searchQuery}"`)
-                )
+                ) : h('tr', null, h('td', { colSpan:8, className:'py-8 text-center ink-soft text-sm' }, `No models found for "${searchQuery}"`))
               )
             )
           )
         ),
 
-        // MOBILE CARD LIST
-        h('div', { className:'md:hidden space-y-3 mb-12' },
-          filteredData.length > 0 ? filteredData.map(item =>
-            h('button', {
-              key: item.id,
-              onClick: () => onOpen(item.id),
-              className: 'w-full text-left surface border line rounded-2xl p-4 shadow-sm active:scale-[0.99] transition-transform'
-            },
+        h('div', { className:'md:hidden space-y-3 mb-6' },
+          pageRows.length>0 ? pageRows.map(m =>
+            h('button', { key:m.id, onClick:()=>onOpen(m.id), className:'w-full text-left surface border line rounded-2xl p-4 shadow-sm active:scale-[0.99] transition-transform' },
               h('div', { className:'flex items-start gap-3' },
-                h(Avatar, { name:item.name, category:item.category }),
+                h(Avatar, { name:m.name, provider:m.provider }),
                 h('div', { className:'min-w-0 flex-1' },
                   h('div', { className:'flex items-center justify-between gap-2' },
-                    h('p', { className:'font-bold ink text-sm truncate' }, item.name),
-                    h(Sparkline, { data:(item.history||[]).map(pt=>pt.value), color: CATEGORY_COLOR[item.category] || 'var(--accent)' })
+                    h('p', { className:'font-bold ink text-sm truncate' }, displayName(m)),
+                    h(Sparkline, { data:(m.history||[]).map(pt=>pt.value), color:providerColor(m.provider).text })
                   ),
-                  item.badge && h('div', { className:'mt-1' }, h(Badge, { label:item.badge })),
+                  h('div', { className:'mt-1' }, h(ProviderTag, { provider:m.provider })),
                   h('div', { className:'flex items-center justify-between mt-3 text-xs font-mono' },
-                    h('span', { className:'font-bold ink' }, item.adoption ? formatAdoptionValue(item.adoption) : 'No data'),
-                    typeof item.changePct === 'number' && h('span', { className:'font-semibold', style:{ color: item.changePct>=0?'var(--positive)':'var(--negative)' } }, `${item.changePct>=0?'+':''}${item.changePct}%`)
+                    h('span', { className:'font-bold ink' }, m.adoption ? formatAdoptionValue(m.adoption) : 'No data'),
+                    h('span', { className:'ink-soft' }, m.tech.contextWindow || '—')
                   ),
                   h('div', { className:'flex items-center justify-between mt-1 text-[11px] ink-soft font-mono' },
-                    h('span', null, item.tech.pricingModel || '—'),
-                    h('span', null, `In ${item.tech.costInput1M || '—'}`)
+                    h('span', null, `In ${m.tech.costInput1M || '—'}`),
+                    h('span', null, `Out ${m.tech.costOutput1M || '—'}`)
                   )
                 )
               )
             )
-          ) : h('div', { className:'text-center ink-soft text-sm py-8' }, `No platforms found for "${searchQuery}"`)
+          ) : h('div', { className:'text-center ink-soft text-sm py-8' }, `No models found for "${searchQuery}"`)
+        ),
+
+        h('div', { className:'flex items-center justify-between mb-12 text-sm' },
+          h('p', { className:'ink-soft' }, `${filtered.length} models · page ${page} of ${totalPages}`),
+          h('div', { className:'flex items-center gap-2' },
+            h('button', { className:'pg-btn px-3 py-1.5 rounded-lg border surface ink text-xs font-semibold', style:{ borderColor:'var(--line)' }, disabled:page<=1, onClick:()=>setPage(p=>Math.max(1,p-1)) }, '← Prev'),
+            h('button', { className:'pg-btn px-3 py-1.5 rounded-lg border surface ink text-xs font-semibold', style:{ borderColor:'var(--line)' }, disabled:page>=totalPages, onClick:()=>setPage(p=>Math.min(totalPages,p+1)) }, 'Next →')
+          )
         )
       );
     }
 
-    function App() {
+    function App(){
       const [searchQuery, setSearchQuery] = useState('');
-      const [selectedCategory, setSelectedCategory] = useState('All');
+      const [selectedProvider, setSelectedProvider] = useState('All');
       const [sort, setSort] = useState({ key:null, direction:'desc' });
+      const [page, setPage] = useState(1);
       const [dark, setDark] = useState(false);
       const [openId, setOpenId] = useState(null);
-      const [status, setStatus] = useState('loading'); // loading | ready | error
-      const [data, setData] = useState({ generatedAt:null, products:[] });
+      const [status, setStatus] = useState('loading');
+      const [data, setData] = useState({ generatedAt:null, totalModels:0, openWeightModels:0, providers:[], products:[] });
 
-      useEffect(() => {
-        document.documentElement.classList.toggle('dark', dark);
-      }, [dark]);
-
-      useEffect(() => {
-        window.scrollTo(0, 0);
-      }, [openId]);
-
-      useEffect(() => {
+      useEffect(()=>{ document.documentElement.classList.toggle('dark', dark); }, [dark]);
+      useEffect(()=>{ window.scrollTo(0,0); }, [openId]);
+      useEffect(()=>{
         fetch('./data.json', { cache:'no-store' })
-          .then(res => { if(!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
+          .then(res => { if(!res.ok) throw new Error('HTTP '+res.status); return res.json(); })
           .then(json => { setData(json); setStatus('ready'); })
           .catch(() => setStatus('error'));
       }, []);
 
-      const openPlatform = openId ? data.products.find(p => p.id === openId) : null;
+      const openModel = openId ? data.products.find(m=>m.id===openId) : null;
 
-      if(status === 'loading'){
-        return h('div', { className:'min-h-screen flex items-center justify-center' },
-          h('p', { className:'ink-soft font-mono text-sm pulse' }, 'Loading live data…')
-        );
-      }
-      if(status === 'error'){
-        return h('div', { className:'min-h-screen flex items-center justify-center px-6 text-center' },
-          h('div', null,
-            h('p', { className:'ink font-display font-bold text-lg mb-2' }, 'Could not load data.json'),
-            h('p', { className:'ink-soft text-sm max-w-md' }, 'Make sure the site is served over HTTP (GitHub Pages, not a local double-click) and that data.json sits next to index.html.')
-          )
-        );
-      }
+      if(status==='loading') return h('div', { className:'min-h-screen flex items-center justify-center' }, h('p', { className:'ink-soft font-mono text-sm pulse' }, 'Loading live catalog…'));
+      if(status==='error') return h('div', { className:'min-h-screen flex items-center justify-center px-6 text-center' },
+        h('div', null,
+          h('p', { className:'ink font-display font-bold text-lg mb-2' }, 'Could not load data.json'),
+          h('p', { className:'ink-soft text-sm max-w-md' }, 'Serve the site over HTTP (GitHub Pages, not a local double-click) and make sure data.json sits next to index.html.')));
 
-      if(openPlatform){
-        return h(React.Fragment, null,
-          h(Ticker, { items: data.products }),
-          h(DetailPage, { platform: openPlatform, dark, setDark, onBack: () => setOpenId(null) })
-        );
+      if(openModel){
+        return h(React.Fragment, null, h(Ticker, { products:data.products }), h(DetailPage, { model:openModel, dark, setDark, onBack:()=>setOpenId(null) }));
       }
-
       return h(React.Fragment, null,
-        h(Ticker, { items: data.products }),
-        h(CatalogPage, {
-          dark, setDark, searchQuery, setSearchQuery,
-          selectedCategory, setSelectedCategory,
-          sort, setSort,
-          products: data.products,
-          generatedAt: data.generatedAt,
-          onOpen: (id) => setOpenId(id)
-        })
+        h(Ticker, { products:data.products }),
+        h(CatalogPage, { dark, setDark, searchQuery, setSearchQuery, selectedProvider, setSelectedProvider, sort, setSort, page, setPage, data, onOpen:(id)=>setOpenId(id) })
       );
     }
 
